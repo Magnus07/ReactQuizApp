@@ -91,10 +91,10 @@ module.exports = {
           const validPassword = await bcrypt.compare(body.password, user.password);
           if (validPassword) {
             session=req.session;
-            session.username=req.body.username;
-            res.status(200).json({ message: "Valid password" });
+            session.user=user;
+            res.json(user);
           } else {
-            res.status(400).json({ error: "Invalid Password" });
+            res.status(400).json({ error: "Invalid Login or Password" });
           }
         } else {
           res.status(401).json({ error: "User does not exist" });
@@ -104,8 +104,8 @@ module.exports = {
     /**
      * UserController.loginView()
      */
-    loginView: async function (req, res) {
-        return res.render('login');
+    profile: async function (req, res) {
+        return res.status(200).json(req.session.user);
     },
 
     /**
@@ -113,7 +113,7 @@ module.exports = {
      */
     logout: async function (req, res) {
         req.session.destroy();
-        res.redirect('/');
+        res.status(200).json("Logged out");
     },
 
     /**

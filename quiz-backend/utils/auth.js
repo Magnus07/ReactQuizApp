@@ -1,8 +1,7 @@
 module.exports.requireAuth = function(req, res, next){
-    if (req.session.username) {
+    if (req.session.user) {
         next();
     } else {
-        res.redirect('/users/login');
-        // res.render('login');
+        res.status(401).json({ error: "Unauthorized!" });
     }
   };

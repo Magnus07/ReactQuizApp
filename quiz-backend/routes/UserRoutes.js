@@ -6,7 +6,7 @@ var auth = require('../utils/auth.js');
 /*
  * GET
  */
-router.get('/', auth.requireAuth, UserController.list);
+router.post('/', auth.requireAuth, UserController.list);
 
 /*
  * GET
@@ -16,17 +16,18 @@ router.get('/signup', UserController.signup);
 /*
  * GET
  */
-router.get('/logout', UserController.logout);
+router.post('/logout', auth.requireAuth, UserController.logout);
+
+
+// login route
+// GET
+//
+router.get('/profile', auth.requireAuth, UserController.profile); 
 
 /*
  * GET
  */
 router.get('/:id', auth.requireAuth, UserController.show);
-
-// login route
-// GET
-//
-router.get('/login', UserController.loginView); 
 
 /*
  * POST
