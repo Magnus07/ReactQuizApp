@@ -3,10 +3,18 @@ var router = express.Router();
 var UserController = require('../controllers/UserController.js');
 var auth = require('../utils/auth.js');
 
+
+
+/*
+ * POST
+ */
+router.post('/', UserController.create);
+
+
 /*
  * GET
  */
-router.post('/', auth.requireAuth, UserController.list);
+router.get('/', auth.requireAuth, UserController.list);
 
 /*
  * GET
@@ -24,15 +32,17 @@ router.post('/logout', auth.requireAuth, UserController.logout);
 //
 router.get('/profile', auth.requireAuth, UserController.profile); 
 
+
+/*
+ * GET
+ */
+router.get('/rating', UserController.rating);
+
 /*
  * GET
  */
 router.get('/:id', auth.requireAuth, UserController.show);
 
-/*
- * POST
- */
-router.post('/', UserController.create);
 
 // login route
 router.post('/login', UserController.login); 

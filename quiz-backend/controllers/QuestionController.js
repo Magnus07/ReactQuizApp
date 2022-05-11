@@ -1,4 +1,5 @@
 var QuestionModel = require("../models/QuestionModel.js");
+var GameSessionsModel = require("../models/GameSessionsModel");
 
 /**
  * QuestionController.js
@@ -98,7 +99,7 @@ module.exports = {
         if (req.session.score === undefined) req.session.score = 0;
 
         req.session.score =
-          req.session.score + (100 * 1 * Math.exp(-0.2 * timeDifference/100));
+          req.session.score + 100 * 1 * Math.exp((-0.2 * timeDifference) / 100);
       }
       return res.status(200).json(qID);
     });
@@ -107,6 +108,22 @@ module.exports = {
   getResult: async function (req, res) {
     var result = Math.floor(req.session.score) || 0;
     delete req.session.score;
+
+    var Session = new GameSessionsModel({
+      'player' : req.session.user.username,
+      'score' : result,
+      'date' : new Date()
+    });
+
+    Session.save(function (err, Session) {
+      if (err) {
+        return res.status(500).json({
+          message: "Error when creating Session",
+          error: err,
+        });
+      }
+    });
+
     return res.status(200).json(result);
   },
 

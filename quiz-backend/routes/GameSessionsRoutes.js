@@ -7,10 +7,17 @@ var GameSessionsController = require('../controllers/GameSessionsController.js')
  */
 router.get('/', GameSessionsController.list);
 
+
+/*
+ * GET
+ */
+router.get('/leaderboard', GameSessionsController.leaderboard);
+
 /*
  * GET
  */
 router.get('/:id', GameSessionsController.show);
+
 
 /*
  * POST
