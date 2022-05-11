@@ -7,6 +7,7 @@ import Profile from "./components/Profile";
 import Logout from "./components/Logout";
 import { UserContext } from "./userContext";
 import { useState, useEffect } from 'react';
+import QuestionCard from "./components/questionCard";
 
 function App() {
   const [user, setUser] = useState(localStorage.user ? JSON.parse(localStorage.user) : null);
@@ -29,6 +30,7 @@ function App() {
             <Route path="/register" element={<Register />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
+            <Route path="/quiz" element={<QuestionCard />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>
