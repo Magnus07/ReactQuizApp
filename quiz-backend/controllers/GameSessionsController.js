@@ -26,11 +26,12 @@ module.exports = {
    * GameSessionsController.leaderboard()
    */
   leaderboard: async function (req, res) {
-    var leaderboad = await GamesessionsModel.aggregate([
-        {
-            $group: { _id: "$player", totalScore: { $sum: "$score" } }
-         }
-    ])
+    // var leaderboad = await GamesessionsModel.aggregate([
+    //     {
+    //         $group: { _id: "$player", totalScore: { $sum: "$score" } }
+    //      }
+    // ])
+    var leaderboad = await GamesessionsModel.find().sort([["score", -1]]).limit(10);
 
       return res.json(leaderboad);
   },

@@ -7,35 +7,7 @@ import { QuestionContainer } from "./QuestionContainer";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../userContext";
 import { Navigate } from "react-router-dom";
-
-const QuizResult = function () {
-  const [result, setResult] = useState("");
-  const isInitialMount = useRef(true);
-
-
-  useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-      const fetchData = async function () {
-        const res = await fetch("http://localhost:3001/questions/result", {
-          credentials: "include",
-        });
-        setResult(await res.json());
-      };
-      fetchData();
-    }
-  }, []);
-
-  return (
-    <>
-      <Container>
-        {/* <Typography> */}
-        Congratulations! Your grade result is: {result}
-        {/* </Typography> */}
-      </Container>
-    </>
-  );
-};
+import { QuizResult } from "./QuizResult";
 
 export default function QuestionCard() {
   const userContext = useContext(UserContext);
@@ -75,15 +47,8 @@ export default function QuestionCard() {
     });
     setIsLoading(false);
   };
-  // const res = await fetch("http://localhost:3001/questions/answer", {
-  //   credentials: "include",
-  // });
-  // const data = await res.json();
-  // setQuestion(data);
-  // setIsLoading(false);
 
   async function changeIndex(e) {
-    // console.log(e.target.innerText);
     await sendAnswer(e.target.innerText);
     await fetchData();
     setQuestionIndex(questionIndex + 1);

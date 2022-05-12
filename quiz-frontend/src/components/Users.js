@@ -8,7 +8,6 @@ function Users() {
     useEffect(function () {
         const getUsers = async function () {
             const res = await fetch("http://localhost:3001/users", {
-                method: 'POST',
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json'

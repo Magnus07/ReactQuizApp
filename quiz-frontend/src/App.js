@@ -8,6 +8,7 @@ import Logout from "./components/Logout";
 import { UserContext } from "./userContext";
 import { useState, useEffect } from 'react';
 import QuestionCard from "./components/questionCard";
+import Leaderboard from "./components/leaderboard";
 
 function App() {
   const [user, setUser] = useState(localStorage.user ? JSON.parse(localStorage.user) : null);
@@ -31,6 +32,7 @@ function App() {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/logout" element={<Logout />}></Route>
             <Route path="/quiz" element={<QuestionCard />}></Route>
+            <Route path="/leaderboard" element={<Leaderboard />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>
