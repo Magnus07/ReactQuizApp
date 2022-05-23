@@ -24,7 +24,7 @@ router.get('/signup', UserController.signup);
 /*
  * GET
  */
-router.post('/logout', auth.requireAuth, UserController.logout);
+router.get('/logout', auth.requireAuth, UserController.logout);
 
 
 // login route
