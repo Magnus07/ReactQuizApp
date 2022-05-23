@@ -77,6 +77,16 @@ module.exports = {
     });
   },
 
+
+
+  loginSuccess: async function (req, res) {
+    if (req.session.user){
+      return res.status(200).json(req.session.user);
+    } else {
+      return res.status(200).json("Authentication unsuccessful.");
+    }
+  },
+
   /**
    * UserController.login()
    */

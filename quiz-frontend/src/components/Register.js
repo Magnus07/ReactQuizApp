@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
 
 function Register() {
   const [username, setUsername] = useState([]);
@@ -29,6 +31,10 @@ function Register() {
     }
   }
 
+  const continueWithXHandler = function (link) {
+    window.location.href = link;
+  };
+
   return (
     <>
       <form onSubmit={Register}>
@@ -56,6 +62,24 @@ function Register() {
         <input type="submit" name="submit" value="Login" />
         <label>{error}</label>
       </form>
+      <Stack spacing={2} direction="row">
+        <Button
+          variant="contained"
+          onClick={() => {
+            continueWithXHandler("http://localhost:3001/passport/auth/google");
+          }}
+        >
+          Continue with Google
+        </Button>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            continueWithXHandler("http://localhost:3001/passport/auth/github");
+          }}
+        >
+          Continue with Github
+        </Button>
+      </Stack>
     </>
   );
 }

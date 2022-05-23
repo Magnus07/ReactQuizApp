@@ -32,7 +32,7 @@ passport.use(
     {
       clientID: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "http://127.0.0.1:3001/passport/auth/github/callback",
+      callbackURL: "http://localhost:3001/passport/auth/github/callback",
     },
     function (accessToken, refreshToken, profile, done) {
       var newUser = {

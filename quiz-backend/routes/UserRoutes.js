@@ -16,6 +16,12 @@ router.post('/', UserController.create);
  */
 router.get('/', auth.requireAuth, UserController.list);
 
+
+/*
+ * GET
+ */
+router.get('/login/success', UserController.loginSuccess);
+
 /*
  * GET
  */

@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var passport = require("passport");
+var userModel = require("../models/UserModel");
 
 router.get(
   "/auth/google",
@@ -12,10 +13,13 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/login" }),
   function (req, res) {
     // Successful authentication, redirect home.
-    // console.log(req);
-    req.session.user = req.session.passport.user;
-    delete req.session.passport;
-    res.redirect("/");
+    userModel.findOne(req.session.passport.user, function (err, user) {
+      if (user) {
+        req.session.user = user;
+      }
+      delete req.session.passport;
+      res.redirect("http://localhost:3000");
+    });
   }
 );
 
@@ -26,12 +30,16 @@ router.get(
 
 router.get(
   "/auth/github/callback",
-  passport.authenticate("github", { failureRedirect: "/login" }),
-  function (req, res) {
+  passport.authenticate("github", { failureRedirect: "/login", succeessRedirect : "http://localhost:3000" }),
+  async function (req, res) {
     // Successful authentication, redirect home.
-    req.session.user = req.session.passport.user;
-    delete req.session.passport;
-    res.redirect("/");
+    userModel.findOne(req.session.passport.user, function (err, user) {
+      if (user) {
+        req.session.user = user;
+      }
+      delete req.session.passport;
+      res.redirect("http://localhost:3000");
+    });
   }
 );
 
