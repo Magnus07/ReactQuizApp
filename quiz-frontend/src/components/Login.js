@@ -1,18 +1,14 @@
 import { useContext, useState } from "react";
 import { UserContext } from "../userContext";
 import { Navigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
+import SocialLogin from "./SocialLogin";
+import { TextField, Button, Paper, Container, Stack } from "@mui/material";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const userContext = useContext(UserContext);
-
-  const continueWithXHandler = function (link) {
-    window.location.href = link;
-  };
 
   async function Login(e) {
     e.preventDefault();
@@ -36,43 +32,39 @@ function Login() {
   }
 
   return (
-    <form onSubmit={Login}>
-      {userContext.user ? <Navigate replace to="/" /> : ""}
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input type="submit" name="submit" value="Log in" />
-      <label>{error}</label>
-      <Stack spacing={2} direction="row">
-        <Button
-          variant="contained"
-          onClick={() => {
-            continueWithXHandler("http://localhost:3001/passport/auth/google");
-          }}
-        >
-          Continue with Google
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            continueWithXHandler("http://localhost:3001/passport/auth/github");
-          }}
-        >
-          Continue with Github
-        </Button>
-      </Stack>
-    </form>
+    <Container maxWidth="md">
+      <Paper elevation={3}>
+        <form onSubmit={Login}>
+          <Stack spacing={2}>
+            {userContext.user ? <Navigate replace to="/" /> : ""}
+            <TextField
+              id="outlined-basic"
+              label="Username"
+              variant="outlined"
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              variant="outlined"
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button type="submit" variant="contained">
+              Login
+            </Button>
+            <label>{error}</label>
+          </Stack>
+        </form>
+        <SocialLogin />
+      </Paper>
+    </Container>
   );
 }
 

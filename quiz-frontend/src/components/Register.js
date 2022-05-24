@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
+import SocialLogin from "./SocialLogin";
+import { TextField, Button, Paper, Container, Stack } from "@mui/material";
 
 function Register() {
   const [username, setUsername] = useState([]);
@@ -31,55 +31,49 @@ function Register() {
     }
   }
 
-  const continueWithXHandler = function (link) {
-    window.location.href = link;
-  };
-
   return (
     <>
-      <form onSubmit={Register}>
-        <input
-          type="text"
-          name="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <input type="submit" name="submit" value="Login" />
-        <label>{error}</label>
-      </form>
-      <Stack spacing={2} direction="row">
-        <Button
-          variant="contained"
-          onClick={() => {
-            continueWithXHandler("http://localhost:3001/passport/auth/google");
-          }}
-        >
-          Continue with Google
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            continueWithXHandler("http://localhost:3001/passport/auth/github");
-          }}
-        >
-          Continue with Github
-        </Button>
-      </Stack>
+      <Container maxWidth="md">
+        <Paper elevation={3}>
+          <form onSubmit={Register}>
+            <Stack spacing={2}>
+              <TextField
+                id="outlined-basic"
+                label="Email"
+                variant="outlined"
+                name="email"
+                value={email}
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Username"
+                variant="outlined"
+                name="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <TextField
+                id="outlined-basic"
+                label="Password"
+                variant="outlined"
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button type="submit" variant="contained">
+                Register
+              </Button>
+              <label>{error}</label>
+            </Stack>
+          </form>
+          <SocialLogin />
+        </Paper>
+      </Container>
     </>
   );
 }

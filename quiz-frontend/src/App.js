@@ -9,6 +9,7 @@ import { UserContext } from "./userContext";
 import { useState, useEffect } from "react";
 import QuestionCard from "./components/questionCard";
 import Leaderboard from "./components/leaderboard";
+import NewHeader from "./components/NewHeader";
 
 function App() {
   const [user, setUser] = useState(
@@ -40,7 +41,7 @@ function App() {
         }}
       >
         <div className="App">
-          <Header title="My application"></Header>
+          <NewHeader />
           <Routes>
             <Route path="/" exact element={<Users />}></Route>
             <Route path="/login" exact element={<Login />}></Route>
@@ -49,6 +50,7 @@ function App() {
             <Route path="/logout" element={<Logout />}></Route>
             <Route path="/quiz" element={<QuestionCard />}></Route>
             <Route path="/leaderboard" element={<Leaderboard />}></Route>
+            <Route path="/newheader" element={<NewHeader />}></Route>
           </Routes>
         </div>
       </UserContext.Provider>
