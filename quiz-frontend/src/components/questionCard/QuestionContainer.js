@@ -13,8 +13,7 @@ export function QuestionContainer(props) {
     <>
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
-          <Typography variant="h5" component="div">
-            {question}
+          <Typography variant="h5" component="div" dangerouslySetInnerHTML={{ __html: question }} >
           </Typography>
         </CardContent>
         <CardActions>
